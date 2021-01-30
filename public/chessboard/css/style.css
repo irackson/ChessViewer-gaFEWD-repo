@@ -1,0 +1,40 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#board div {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#board ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 12.5vw;
+    display: flex;
+    flex-direction: row;
+}
+
+#board li {
+    margin: 0px;
+    padding: 0px;
+    width: 12.5vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#board-container img {
+    padding-top: 10%;
+    height: 70%;
+    width: 70%;
+}
+
+/* svg from https://thenounproject.com/demograph/collection/chess-set-pieces/ */

@@ -1,0 +1,62 @@
+const functions = require('firebase-functions');
+const puppeteer = require('puppeteer');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+
+// exports.addMessage = functions.https.onRequest(async (req, res) => {
+//     const url = req.query.url || 'http://www.lutanho.net/pgn/pgn2fen.html';
+
+//     const browser = await browserPromise;
+//     const context = await browser.createIncognitoBrowserContext();
+//     const page = await context.newPage();
+//     await page.goto(url);
+
+//     let title;
+
+//     try {
+//       title = await page.title();
+//     } catch (e) {
+//       console.log("Error!");
+//       console.log(e);
+//     }
+//     context.close()
+
+//     const writeResult = await admin.firestore().collection('puppeteer').add({title: title});
+
+
+//     res.json({result: 'Message with ID: ${writeResult.id} added.'});
+//     // res.setHeader('Content-Type', 'text/plain');
+//     // res.send(title);
+// });
+
+
+
+let browserPromise = puppeteer.launch({
+    args: [
+        '--no-sandbox',
+    ]
+});
+
+exports.addMessage = functions.https.onRequest(async (req, res) => {
+    const fen = req.query.text.toUpperCase();
+
+    const url = req.query.url || 'http://www.example.com';
+
+    const browser = await browserPromise;
+    const context = await browser.createIncognitoBrowserContext();
+    const page = await context.newPage();
+    await page.goto(url);
+
+    let title;
+
+    try {
+        title = await page.title();
+        const writeResult = await admin.firestore().collection('messages').add({ fen: fen });
+        res.json({ result: writeResult.id , title: title});
+    } catch (e) {
+        console.log("Error!");
+        console.log(e);
+    }
+    context.close()
+});

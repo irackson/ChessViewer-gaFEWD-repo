@@ -1,0 +1,36 @@
+const functions = require('firebase-functions');
+const puppeteer = require('puppeteer');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//   functions.logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });
+
+let browserPromise = puppeteer.launch({
+    args: [
+        '--no-sandbox',
+    ]
+});
+
+exports.screenshot = async (req, res) => {
+    const url = req.query.url || 'http://www.lutanho.net/pgn/pgn2fen.html';
+
+    const browser = await browserPromise;
+    const context = await browser.createIncognitoBrowserContext();
+    const page = await context.newPage();
+
+    await page.goto(url);
+
+    const image = await page.screenshot();
+
+    res.setHeader('Content-Type', 'image/pgn');
+    res.send(image);
+
+    context.close()
+};

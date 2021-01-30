@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+
+<head>
+  <meta charset="utf-8">
+  <title>Ian Rackson's Final Project</title>
+  <meta name="description" content="Ian Rackson Final Project">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/8.1.1/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-auth.js"></script> -->
+  <script defer src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-firestore.js"></script> -->
+  <script defer src="/__/firebase/8.1.1/firebase-functions.js"></script>
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-messaging.js"></script> -->
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-storage.js"></script> -->
+  <script defer src="/__/firebase/8.1.1/firebase-analytics.js"></script>
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-remote-config.js"></script> -->
+  <!-- <script defer src="/__/firebase/8.1.1/firebase-performance.js"></script> -->
+  <!-- 
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
+      -->
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+
+</head>
+
+<body>
+  <main>
+    <header class="header-container">
+      <section class="logo">
+        <img src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png">
+        <p>a final project by&nbsp<span>ian rackson</span></p>
+        <!-- <aside class="subtitle">
+            <p>a final project by&nbsp<span>ian rackson</span></p>
+          </aside> -->
+      </section>
+
+      <section class="info-container">
+        <section class="contact-info-box">
+          <p">nasirus@protonmail</p>
+            <p>(917)-(684)-(8443)</p>
+        </section>
+
+
+
+        <section class="specs-box-container">
+          <div class="specs-names">
+            <p"version_number">Version #:&nbsp</p>
+              <p"last_date_edited">Date edited:&nbsp</p>
+          </div>
+          <div class="specs-values" id="specs-values">
+          </div>
+        </section>
+      </section>
+
+    </header>
+
+    <section class="nextGame">
+      <div class="nextGame-burger-container">
+        <div class="nextGame-burger" id="nextGame-burger">
+          <p><a href="">Load New</a>
+          <p>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="instructions">
+      <div class="instructions-burger-container" id="instructions-trigger">
+        <div class="instructions-burger" id="instructions-burger">
+          <p>Info/Control</p>
+        </div>
+      </div>
+
+      <div class="instructions-content" id="instructions-content">
+        <p id="white"></p>
+        <p id="black"></p>
+        <p id="result"></p>
+        <p id="date"></p>
+      </div>
+    </section>
+
+    <div class="game">
+      <div class="c-loader"></div>
+      <iframe id="chess-frame" width="500" height="500" frameborder="no"></iframe>
+    </div>
+
+    <section id="space-gap"></section>
+
+    <footer class="footer-container">
+      <section class="new-rating">
+        <div class="new-rating-text">
+          <form id="submit_form"><input type="submit" value="Submit"></form>
+        </div>
+        <div class="new-rating-stars">
+
+          <!-- start of code from https://codepen.io/brianknapp/pen/JEotD/?editors=1111 -->
+          <div class="stars" data-stars="1">
+            <svg height="25" width="23" class="star rating" data-rating="1">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="star rating" data-rating="2">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="star rating" data-rating="3">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="star rating" data-rating="4">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="star rating" data-rating="5">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+          </div>
+          <!-- end of code from https://codepen.io/brianknapp/pen/JEotD/?editors=1111 -->
+
+        </div>
+      </section>
+
+      <section class="average-rating">
+        <div class="average-rating-text">
+          <p id="total-ratings"></p>
+          <p>Average Rating </p>
+        </div>
+        <div class="average-rating-stars">
+
+          <!-- start of altered code sourced from https://codepen.io/brianknapp/pen/JEotD/?editors=1111 -->
+          <div class="avg-stars hide">
+            <svg height="25" width="23" class="avg-star" id="avg_star1">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="avg-star" id="avg_star2">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="avg-star" id="avg_star3">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="avg-star" id="avg_star4">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <svg height="25" width="23" class="avg-star" id="avg_star5">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+            </svg>
+            <div>
+              <!-- end of altered code sourced from https://codepen.io/brianknapp/pen/JEotD/?editors=1111 -->
+            </div>
+      </section>
+    </footer>
+  </main>
+
+  <script src="js/app.js" async defer></script>
+
+</body>
+
+</html>
